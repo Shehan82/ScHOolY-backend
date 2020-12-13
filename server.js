@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const url = 'mongodb://localhost:27017/schooly';
-const student = require('./models/student');
+const student = require('./models/studentModel');
+const grade = require('./models/gradeModel');
 const app = express();
 
 //DB connection
@@ -16,21 +17,25 @@ app.post('/create', (req, res)=>{
     const s1 = new student(
         {
             fullName : req.body.fullName,
-        // address : String,
-        // landPhoneNUm : Number,
-        // mobileNum : Number,
-        // mothersName : String,
-        // fathersName : String,
-        // grade : Number,
-        // class : String,
+            address : req.body.address,
+            landPhoneNUm : req.body.landPhoneNum,
+            mobileNum : req.body.mobileNum,
+            mothersName : req.body.mothersName,
+            fathersName : req.body.fathersName,
+            grade : req.body.grade,
+            class : req.body.class,
         sem : [
             {
                 name : req.body.sem[0].name,
                 marks : req.body.sem[0].marks
             },
             {
-                name : req.body.sem[0].name,
-                marks : req.body.sem[0].marks
+                name : req.body.sem[1].name,
+                marks : req.body.sem[1].marks
+            },
+            {
+                name : req.body.sem[2].name,
+                marks : req.body.sem[2].marks
             }
         ]
         }
