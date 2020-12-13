@@ -16,32 +16,44 @@ app.use(express.urlencoded({extended:true}));
 app.post('/create', (req, res)=>{
     const s1 = new student(
         {
+            // index : req.body.index,
             fullName : req.body.fullName,
-            address : req.body.address,
-            landPhoneNUm : req.body.landPhoneNum,
-            mobileNum : req.body.mobileNum,
-            mothersName : req.body.mothersName,
-            fathersName : req.body.fathersName,
-            grade : req.body.grade,
-            class : req.body.class,
+            // address : req.body.address,
+            // landPhoneNUm : req.body.landPhoneNum,
+            // mobileNum : req.body.mobileNum,
+            // mothersName : req.body.mothersName,
+            // fathersName : req.body.fathersName,
+            // grade : req.body.grade,
+            // class : req.body.class,
         sem : [
             {
                 name : req.body.sem[0].name,
                 marks : req.body.sem[0].marks
-            },
-            {
-                name : req.body.sem[1].name,
-                marks : req.body.sem[1].marks
-            },
-            {
-                name : req.body.sem[2].name,
-                marks : req.body.sem[2].marks
             }
+            // {
+            //     name : req.body.sem[1].name,
+            //     marks : req.body.sem[1].marks
+            // },
+            // {
+            //     name : req.body.sem[2].name,
+            //     marks : req.body.sem[2].marks
+            // }
         ]
         }
     )
 
-    res.send(s1);
+    if(s1.save())
+    {
+        res.send("save successfully!");
+    }
+    else
+    {
+        res.send("not save!!!!");
+    }
+
+   
+    
+    
 })
 
 
