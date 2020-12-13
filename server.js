@@ -52,9 +52,37 @@ app.post('/create', (req, res)=>{
     }   
 })
 
+app.post('/create/grade', (req, res)=>{
+    const g1 = new grade(
+        {
+            grade : req.body.grade,
+            class : req.body.class
+        }
+    )
+
+    if(g1.save())
+    {
+        res.send("grade added!");
+    }
+    else
+    {
+        res.send("grade not added");
+    }
+})
+
 
 app.get('/',(req, res)=>{
-    res.send("hello i am shehan");
+    grade.find((err, data)=>{
+        if(err)
+        {
+            res.status(500).send(err)
+        }
+        else
+        {
+            res.status(200).send(data)
+        }
+    })
+    
 })
 
 
