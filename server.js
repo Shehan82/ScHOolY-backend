@@ -16,28 +16,28 @@ app.use(express.urlencoded({extended:true}));
 app.post('/create', (req, res)=>{
     const s1 = new student(
         {
-            // index : req.body.index,
+            index : req.body.index,
             fullName : req.body.fullName,
-            // address : req.body.address,
-            // landPhoneNUm : req.body.landPhoneNum,
-            // mobileNum : req.body.mobileNum,
-            // mothersName : req.body.mothersName,
-            // fathersName : req.body.fathersName,
-            // grade : req.body.grade,
-            // class : req.body.class,
+            address : req.body.address,
+            landNum : req.body.landNum,
+            mobileNum : req.body.mobileNum,
+            mothersName : req.body.mothersName,
+            fathersName : req.body.fathersName,
+            grade : req.body.grade,
+            class : req.body.class,
         sem : [
             {
                 name : req.body.sem[0].name,
                 marks : req.body.sem[0].marks
+            },
+            {
+                name : req.body.sem[1].name,
+                marks : req.body.sem[1].marks
+            },
+            {
+                name : req.body.sem[2].name,
+                marks : req.body.sem[2].marks
             }
-            // {
-            //     name : req.body.sem[1].name,
-            //     marks : req.body.sem[1].marks
-            // },
-            // {
-            //     name : req.body.sem[2].name,
-            //     marks : req.body.sem[2].marks
-            // }
         ]
         }
     )
@@ -49,11 +49,7 @@ app.post('/create', (req, res)=>{
     else
     {
         res.send("not save!!!!");
-    }
-
-   
-    
-    
+    }   
 })
 
 
