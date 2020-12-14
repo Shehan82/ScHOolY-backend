@@ -71,7 +71,7 @@ app.post('/create/grade', (req, res)=>{
 })
 
 
-app.get('/',(req, res)=>{
+app.get('/grade',(req, res)=>{
     grade.find((err, data)=>{
         if(err)
         {
@@ -83,7 +83,12 @@ app.get('/',(req, res)=>{
         }
     })
     
+});
+
+app.get('/grade/:grade/:class', (req, res)=>{
+    res.send(req.params.grade);
 })
+
 
 
 //server
