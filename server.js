@@ -86,11 +86,37 @@ app.get('/grade',(req, res)=>{
 });
 
 app.get('/grade/:grade/:class', (req, res)=>{
-    res.send(req.params.grade);
+    // res.send(req.params.grade);
+    var grade = parseInt(req.params.grade);
+    var cls = req.params.class;
+    student.find({"grade":`${grade}`, "class":`${cls}`},(err,data)=>{
+        if(err)
+        {
+            res.status(500).send(err+"ha");
+        }
+        else
+        {
+            res.status(200).send(data);
+        }
+    })
+})
+
+app.get('/classes/:grade',(req, res)=>{
+    var grde = req.params.grade;
+    grade.find({"grade":`${grde}`},(err, data)=>{
+        if(err)
+        {
+            res.status(500).send(err);
+        }
+        else
+        {
+            res.status(200).send(data);
+        }
+    })
 })
 
 
 
 //server
-PORT = process.env.PORT || 9000;
+PORT = process.env.PORT || 9001;
 app.listen(PORT, ()=>{console.log(`Server running on port ${PORT}`)})
