@@ -115,6 +115,20 @@ app.get('/classes/:grade',(req, res)=>{
     })
 })
 
+app.get('/index/:indexNum', (req,res)=>{
+    var indexNum = parseInt(req.params.indexNum);
+    student.find({"index":`${indexNum}`},(err,data)=>{
+        if(err)
+        {
+            res.status(500).send(err);
+        }
+        else
+        {
+            res.status(200).send(data);
+        }
+    })
+})
+
 
 
 //server
