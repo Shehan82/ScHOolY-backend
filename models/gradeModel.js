@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const gradeSchema = mongoose.Schema(
     {
         grade : Number,
-        class : Array
+        class : Object
     }
 )
 
