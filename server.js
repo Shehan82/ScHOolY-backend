@@ -4,9 +4,10 @@ const url = 'mongodb://localhost:27017/schooly';
 const student = require('./models/studentModel');
 const grade = require('./models/gradeModel');
 const app = express();
+const url2 = 'mongodb+srv://shehan82:GO8aqOOYhjOFaPv0@cluster0.ego3n.mongodb.net/schooly?retryWrites=true&w=majority'
 
 //DB connection
-mongoose.connect(url, {useNewUrlParser:true, useFindAndModify: false});
+mongoose.connect(url2, {useNewUrlParser:true, useFindAndModify: false});
 mongoose.connection.on('open', ()=>{console.log("Database connected!")});
 
 //Body parser
