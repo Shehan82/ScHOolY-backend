@@ -1,6 +1,6 @@
 #  **ScHOolY**
 
-Schooly is a single page web application. it is mainly focus on student management for schools. 
+Schooly is a single page web application. it is mainly focus on students management for schools. 
 
 You can see the Demo of SCHOOLY by clicking the link Below
 
