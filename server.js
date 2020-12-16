@@ -130,6 +130,21 @@ app.get('/index/:indexNum', (req,res)=>{
     })
 })
 
+app.get('/classDetails/:grade', (req, res)=>{
+    var grd = parseInt(req.params.grade);
+    
+    grade.find({"grade":`${grd}`}, (err, data)=>{
+        if(err)
+        {
+            res.status(500).send(err);
+        }
+        else
+        {
+            res.status(200).send(data);
+        }
+    })
+})
+
 
 
 //server
