@@ -1,31 +1,15 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const studentSchema = mongoose.Schema(
-    {
-        index : Number,
-        fullName : String,
-        address : String,
-        landNum : Number,
-        mobileNum : Number,
-        mothersName : String,
-        fathersName : String,
-        grade : Number,
-        class : String,
-        sem : [
-            {
-                name : String,
-                marks : Object,
-            },
-            {
-                name : String,
-                marks : Object,
-            },
-            {
-                name : String,
-                marks : Object,
-            }
-        ]
-    }
-)
+const studentSchema = mongoose.Schema({
+  index: Number,
+  fullName: String,
+  address: String,
+  landNum: Number,
+  mobileNum: Number,
+  mothersName: String,
+  fathersName: String,
+  grade: Number,
+  class: String,
+});
 
-module.exports = mongoose.model('student', studentSchema);
+module.exports = mongoose.model("student", studentSchema);
