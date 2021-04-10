@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const url = "mongodb://localhost:27017/schooly";
 const student = require("./models/studentModel");
 const grade = require("./models/gradeModel");
+const gradeSubject = require("./models/gradeSubject");
 const app = express();
 const url2 =
   "mongodb+srv://shehan82:GO8aqOOYhjOFaPv0@cluster0.ego3n.mongodb.net/schooly?retryWrites=true&w=majority";
@@ -41,26 +42,12 @@ app.post("/create", (req, res) => {
     fathersName: req.body.fathersName,
     grade: req.body.grade,
     class: req.body.class,
-    sem: [
-      {
-        name: req.body.sem[0].name,
-        marks: req.body.sem[0].marks,
-      },
-      {
-        name: req.body.sem[1].name,
-        marks: req.body.sem[1].marks,
-      },
-      {
-        name: req.body.sem[2].name,
-        marks: req.body.sem[2].marks,
-      },
-    ],
   });
 
   if (s1.save()) {
-    res.send("save successfully!");
+    res.send("ok");
   } else {
-    res.send("not save!!!!");
+    res.send("no");
   }
 });
 
@@ -81,14 +68,35 @@ app.post("/create/grade", (req, res) => {
   }
 });
 
+app.get("/gradeSub", (req, res) => {
+  gradeSubject.find((err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+app.post("/gradeSub", (req, res) => {
+  const g1 = new gradeSubject({
+    grade: req.body.grade,
+    subjects: req.body.subjects,
+  });
+
+  if (g1.save()) {
+    res.send("grade added!");
+  } else {
+    res.send("grade not added");
+  }
+});
+
 app.get("/grade", (req, res) => {
   grade.find((err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.header("Access-Control-Allow-Origin", "*");
       res.status(200).send(data);
-      console.log(data);
     }
   });
 });
