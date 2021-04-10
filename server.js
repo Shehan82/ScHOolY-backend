@@ -4,6 +4,7 @@ const url = "mongodb://localhost:27017/schooly";
 const student = require("./models/studentModel");
 const grade = require("./models/gradeModel");
 const gradeSubject = require("./models/gradeSubject");
+const resultsModel = require("./models/resultsModel");
 const app = express();
 const url2 =
   "mongodb+srv://shehan82:GO8aqOOYhjOFaPv0@cluster0.ego3n.mongodb.net/schooly?retryWrites=true&w=majority";
@@ -42,6 +43,21 @@ app.post("/create", (req, res) => {
     fathersName: req.body.fathersName,
     grade: req.body.grade,
     class: req.body.class,
+  });
+
+  if (s1.save()) {
+    res.send("ok");
+  } else {
+    res.send("no");
+  }
+});
+
+app.post("/createResult", (req, res) => {
+  const s1 = new resultsModel({
+    index: req.body.index,
+    term: req.body.term,
+    grade: req.body.grade,
+    marks: req.body.marks,
   });
 
   if (s1.save()) {
