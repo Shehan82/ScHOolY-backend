@@ -94,6 +94,16 @@ app.get("/gradeSub", (req, res) => {
   });
 });
 
+app.get("/indexResult/:indexNum", (req, res) => {
+  resultsModel.find({ index: req.params.indexNum }, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
 app.post("/gradeSub", (req, res) => {
   const g1 = new gradeSubject({
     grade: req.body.grade,
