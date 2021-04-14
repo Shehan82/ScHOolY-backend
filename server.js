@@ -104,6 +104,29 @@ app.get("/indexResult/:indexNum", (req, res) => {
   });
 });
 
+// app.get("/find", (req, res) => {
+//   resultsModel.find({ index: /1800/ }, (err, data) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       res.status(200).send(data);
+//     }
+//   });
+// });
+
+app.get("/find/:indexNum", (req, res) => {
+  student.find(
+    { index: { $regex: req.params.indexNum, $options: "i" } },
+    (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    }
+  );
+});
+
 app.post("/gradeSub", (req, res) => {
   const g1 = new gradeSubject({
     grade: req.body.grade,
