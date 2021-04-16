@@ -10,6 +10,7 @@ const studentSchema = mongoose.Schema({
   fathersName: String,
   grade: Number,
   class: String,
+  isRemoved: Number,
 });
 
 module.exports = mongoose.model("student", studentSchema);

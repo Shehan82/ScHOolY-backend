@@ -43,6 +43,7 @@ app.post("/create", (req, res) => {
     fathersName: req.body.fathersName,
     grade: req.body.grade,
     class: req.body.class,
+    isRemoved: 0,
   });
 
   if (s1.save()) {
@@ -66,6 +67,21 @@ app.post("/updateStu", (req, res) => {
       grade: req.body.grade,
       class: req.body.class,
     },
+    (err, data) => {
+      if (err) {
+        res.send("no");
+      } else {
+        console.log(data);
+        res.send("yes");
+      }
+    }
+  );
+});
+
+app.post("/removeStudent", (req, res) => {
+  student.findOneAndUpdate(
+    { index: req.body.index },
+    { isRemoved: 1 },
     (err, data) => {
       if (err) {
         res.send("no");
@@ -141,7 +157,7 @@ app.get("/indexResult/:indexNum", (req, res) => {
 
 app.get("/find/:indexNum", (req, res) => {
   student.find(
-    { index: { $regex: req.params.indexNum, $options: "i" } },
+    { index: { $regex: req.params.indexNum, $options: "i" }, isRemoved: 0 },
     (err, data) => {
       if (err) {
         res.status(500).send(err);
@@ -150,6 +166,16 @@ app.get("/find/:indexNum", (req, res) => {
       }
     }
   );
+});
+
+app.get("/findAll", (req, res) => {
+  student.find({ isRemoved: 0 }, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
 });
 
 app.post("/gradeSub", (req, res) => {
