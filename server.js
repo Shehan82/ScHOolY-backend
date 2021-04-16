@@ -52,6 +52,31 @@ app.post("/create", (req, res) => {
   }
 });
 
+app.post("/updateStu", (req, res) => {
+  console.log(req.body.landNum);
+  student.findOneAndUpdate(
+    { index: req.body.index },
+    {
+      fullName: req.body.fullName,
+      address: req.body.address,
+      landNum: req.body.landNum,
+      mobileNum: req.body.mobileNum,
+      mothersName: req.body.mothersName,
+      fathersName: req.body.fathersName,
+      grade: req.body.grade,
+      class: req.body.class,
+    },
+    (err, data) => {
+      if (err) {
+        res.send("no");
+      } else {
+        console.log(data);
+        res.send("yes");
+      }
+    }
+  );
+});
+
 app.post("/createResult", (req, res) => {
   const s1 = new resultsModel({
     index: req.body.index,
