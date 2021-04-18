@@ -20,16 +20,6 @@ mongoose.connection.on("open", () => {
   console.log("Database connected!");
 });
 
-if (process.env.NODE_ENV === "production") {
-  // Exprees will serve up production assets
-  app.use(express.static("client/build"));
-
-  // Express serve up index.html file if it doesn't recognize route
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
 //Body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -42,6 +32,17 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+if (process.env.NODE_ENV === "production") {
+  // Exprees will serve up production assets
+  app.use(express.static("client/build"));
+
+  // Express serve up index.html file if it doesn't recognize route
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 // const TWO_HOURS = 1000 * 60 * 60 * 2;
 // const SESS_LIFETIME = TWO_HOURS;
