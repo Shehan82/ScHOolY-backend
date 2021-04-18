@@ -6,6 +6,7 @@ const grade = require("./models/gradeModel");
 const gradeSubject = require("./models/gradeSubject");
 const resultsModel = require("./models/resultsModel");
 const app = express();
+const session = require("express-session");
 const url2 =
   "mongodb+srv://shehan82:GO8aqOOYhjOFaPv0@cluster0.ego3n.mongodb.net/schooly?retryWrites=true&w=majority";
 
@@ -31,6 +32,20 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+const TWO_HOURS = 1000 * 60 * 60 * 2;
+const SESS_LIFETIME = TWO_HOURS;
+const SESS_SECRET = "apple orange";
+
+const users = [
+  { id: 1, name: "shehan", email: "shehan@gmail.com", password: "shehan" },
+  {
+    id: 2,
+    name: "sandeepa",
+    email: "sandeepa@gmail.com",
+    password: "sandeepa",
+  },
+];
 
 app.post("/create", (req, res) => {
   const s1 = new student({
