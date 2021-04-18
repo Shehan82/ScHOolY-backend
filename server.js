@@ -11,7 +11,7 @@ const url2 =
   "mongodb+srv://shehan82:GO8aqOOYhjOFaPv0@cluster0.ego3n.mongodb.net/schooly?retryWrites=true&w=majority";
 
 //DB connection
-mongoose.connect(process.env.MONGODB_URI || url2, {
+mongoose.connect(url2, {
   useNewUrlParser: true,
   useFindAndModify: false,
 });
@@ -20,42 +20,42 @@ mongoose.connection.on("open", () => {
   console.log("Database connected!");
 });
 
-if (process.env.NODE_ENV === "production") {
-  // Exprees will serve up production assets
-  app.use(express.static("client/build"));
+// if (process.env.NODE_ENV === "production") {
+//   // Exprees will serve up production assets
+//   app.use(express.static("client/build"));
 
-  // Express serve up index.html file if it doesn't recognize route
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+//   // Express serve up index.html file if it doesn't recognize route
+//   const path = require("path");
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+//   });
+// }
 //Body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  req.header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   req.header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
 
-const TWO_HOURS = 1000 * 60 * 60 * 2;
-const SESS_LIFETIME = TWO_HOURS;
-const SESS_SECRET = "apple orange";
+// const TWO_HOURS = 1000 * 60 * 60 * 2;
+// const SESS_LIFETIME = TWO_HOURS;
+// const SESS_SECRET = "apple orange";
 
-const users = [
-  { id: 1, name: "shehan", email: "shehan@gmail.com", password: "shehan" },
-  {
-    id: 2,
-    name: "sandeepa",
-    email: "sandeepa@gmail.com",
-    password: "sandeepa",
-  },
-];
+// const users = [
+//   { id: 1, name: "shehan", email: "shehan@gmail.com", password: "shehan" },
+//   {
+//     id: 2,
+//     name: "sandeepa",
+//     email: "sandeepa@gmail.com",
+//     password: "sandeepa",
+//   },
+// ];
 
 app.post("/create", (req, res) => {
   const s1 = new student({
